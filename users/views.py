@@ -2,12 +2,12 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from users.forms import UserloginForm
+from users.forms import UserLoginForm
 
 
 def login(request):
     if request.method == 'POST':
-        form = UserloginForm(data=request.POST)
+        form = UserLoginForm(data=request.POST)
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
@@ -18,7 +18,7 @@ def login(request):
         else:
             print(form.errors)
     else:
-        form = UserloginForm()
+        form = UserLoginForm()
     context = {'title': 'GeekShop - Авторизация', 'form': form}
     return render(request, 'users/login.html', context)
 
