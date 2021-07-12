@@ -38,6 +38,7 @@ def registration(request):
 
 #@login_required
 def profile(request):
+    user = request.user
     if request.method == 'POST':
         form = UserProfileForm(instance=request.user, files=request.FILES, data=request.POST)
         if form.is_valid():
@@ -48,7 +49,7 @@ def profile(request):
     context = {
         'title': 'GeekShop - Личный кабинет',
         'form': form,
-        'baskets': Basket.objects.all(),
+        'baskets': Basket.objects.filter(user=user),
     }
     return render(request, 'users/profile.html', context)
 
