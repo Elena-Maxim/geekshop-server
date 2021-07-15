@@ -45,7 +45,8 @@ def profile(request):
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
     else:
-        form = UserProfileForm(instance=request.user)
+        form = UserProfileForm(instance=user)
+
     context = {
         'title': 'GeekShop - Личный кабинет',
         'form': form,
