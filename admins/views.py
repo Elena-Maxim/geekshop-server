@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
+
 from users.models import User
 from admins.forms import UserAdminRegistrationForm, UserAdminProfileForm
 
@@ -47,5 +48,6 @@ def admin_users_update(request, pk):
 
 def admin_users_remove(request, pk):
     user = User.objects.get(id=pk)
-    user.delete()
+    user.is_active = False
+    user.save()
     return HttpResponseRedirect(reverse('admins:admin_users'))
